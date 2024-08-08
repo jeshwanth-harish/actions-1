@@ -9,11 +9,18 @@ jobs:
         - name: Checkout repo    
           uses: actions/checkout@v4
 
-        - name: welcome message
-          run: echo "My frirst github actions job"
+        - name: List and read files
+          run: | 
+            echo "My frirst github actions job"
+            ls -larth
+            cat README.md
+        
+        - name: Generate ASCII Art work
+          run: cowsay -f dragon "Run take cover, I am a DRAGON .... FIRE!" >> dragon.txt
 
-        - name: list files
-          run: 'ls -lrth'
 
-        - name: Read file
-          run: cat README.md
+      #  - name: list files
+       #   run: 'ls -lrth'
+
+       # - name: Read file
+      #    run: cat README.md
