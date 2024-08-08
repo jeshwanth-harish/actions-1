@@ -13,7 +13,9 @@ jobs:
           run: 'ls -lrtha'
 
         - name: Executing shell script
-          run: ./ascii-script.sh
+          run: |
+            chmod +x ascii-script.shell
+            ./ascii-script.sh
         
 
        
