@@ -12,15 +12,20 @@ jobs:
         - name: Executing Cowsay program
           run: cowsay -f dragon "Run take cover, I am a DRAGON .... FIRE!" >> dragon.txt
         
-        - name: Sleep for 30 seccond
-          run: sleep 30
+        - name: Upload Dragon text file
+          uses: actions/upload-artifact@v4
+          with:
+            name: Dragon-test-file
+            path: dragon.txt
 
     test_job_2:
         needs: build_job_1
         runs-on: macos-latest
         steps:
-        - name: Sleep for 10 secconds
-          run: sleep 10
+        - name: Download Dragon text file
+          uses: actions/download-artifact@v4
+          with:
+            name: Dragon-test-file
 
         - name: Test file exists
           run: grep -i "dragon" dragon.txt
@@ -29,6 +34,11 @@ jobs:
         needs: [test_job_2]
         runs-on: ubuntu-latest
         steps:
+        - name: Download Dragon text file
+          uses: actions/download-artifact@v4
+          with:
+            name: Dragon-test-file
+            
         - name: Read file
           run: cat dragon.txt
 
